@@ -1,0 +1,12 @@
+{
+  "name": "appempatia",
+  "displayName": "appempatia",
+  "expo": {
+    "name": "appempatia",
+    "slug": "appempatia",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
