@@ -17,11 +17,13 @@ export const RegisterContainer = styled.View`
   margin-top: 16px;
   align-items: center;
 `;
+
 export const RegisterText = styled.Text`
   color: ${({ theme }) => theme.colors.secundary};
   font-size: 18px;
   font-family: ${({ theme }) => theme.fonts.regular};
 `;
+
 export const RegisterButton = styled.Text`
   color: ${({ theme }) => theme.colors.button};
   font-size: 18px;

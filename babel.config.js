@@ -11,7 +11,8 @@ module.exports = function(api) {
             components: "./src/components",
             styles: "./src/global/styles",
             assets:"./src/assets",
-            services:"./src/services"
+            services:"./src/services",
+            routes:"./src/routes"
           },
         },
       ],

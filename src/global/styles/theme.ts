@@ -7,6 +7,7 @@ export default {
     background: '#FEFEFE',
     innerBackground: '#F2F2F2',
     input_text: '#9E9E9E',
+    inactive_icon: '#9E9E9E',
 
     opacity_button: 'rgba(189, 106, 240, 0.9)',
   },

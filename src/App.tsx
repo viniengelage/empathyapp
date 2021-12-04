@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { ThemeProvider } from 'styled-components';
+import { NavigationContainer } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 
 import {
@@ -14,7 +14,8 @@ import {
 
 import defaultTheme from 'styles/theme';
 
-import Login from 'screens/Login';
+// import AppRoutes from 'routes/app.routes';
+import AuthRoutes from 'routes/auth.routes';
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -28,7 +29,9 @@ const App = () => {
   if (!fontsLoaded) return <AppLoading />;
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Login />
+      <NavigationContainer>
+        <AuthRoutes />
+      </NavigationContainer>
     </ThemeProvider>
   );
 };

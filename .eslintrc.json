@@ -28,6 +28,7 @@
     "rules": {
       "@typescript-eslint/no-empty-interface":"off",
       "react/require-default-props":"off",
+      "react/no-unstable-nested-components":"off",
       "camelcase":"off",
       "operator-linebreak":"off",
       "implicit-arrow-linebreak":"off",
