@@ -1,13 +1,11 @@
 import styled, { css } from 'styled-components/native';
 
-import { RectButton } from 'react-native-gesture-handler';
-
 interface IProps {
   isLoading?: boolean;
   isActive?: boolean;
 }
 
-export const Container = styled(RectButton)<IProps>`
+export const Container = styled.TouchableOpacity<IProps>`
   width: 100%;
   height: 50px;
   background: ${({ theme }) => theme.colors.button};

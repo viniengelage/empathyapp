@@ -31,14 +31,20 @@ interface IProps {
 export default function Select({
   placeholder: placeholderProp,
   name,
-  options,
+  options = [],
 }: IProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const [placeholder, setPlaceholder] = useState<string>(placeholderProp);
   const [value, setValue] = useState<string>('');
 
-  const { registerField, fieldName } = useField(name);
+  const { registerField, fieldName, defaultValue } = useField(name);
+
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(defaultValue);
+    }
+  }, [defaultValue]);
 
   useEffect(() => {
     registerField({

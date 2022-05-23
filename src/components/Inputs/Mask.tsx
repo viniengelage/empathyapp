@@ -49,9 +49,12 @@ export const Mask = ({
   const [isFilled, setIsFilled] = useState<boolean>(false);
 
   useEffect(() => {
-    if (defaultValue && inputRef.current?.value) {
+    if (defaultValue) {
       setInputValue(defaultValue);
-      inputRef.current.value = defaultValue;
+
+      if (inputRef.current) {
+        inputRef.current.value = defaultValue;
+      }
     }
   }, [defaultValue]);
 

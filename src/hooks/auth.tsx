@@ -20,9 +20,11 @@ interface ILoginProps {
 }
 
 interface IContextProps {
-  login(data: ILoginProps): Promise<void>;
   user: IUserProps;
+  login(data: ILoginProps): Promise<void>;
   isLoading: boolean;
+  logout(): void;
+  getUser(): Promise<void>;
 }
 
 const Auth = createContext<IContextProps>({} as IContextProps);
@@ -72,17 +74,24 @@ const AuthProvider = ({ children }: IContextReference) => {
     setLoading(false);
   }, []);
 
+  const handleLogout = useCallback(async () => {
+    await AsyncStorage.removeItem('@access_token');
+    setUser({} as IUserProps);
+  }, []);
+
   useEffect(() => {
     handleGetUser();
   }, [handleGetUser]);
 
   const contextValues = useMemo<IContextProps>(
     () => ({
-      login: handleLogin,
-      isLoading: loading,
       user,
+      isLoading: loading,
+      login: handleLogin,
+      logout: handleLogout,
+      getUser: handleGetUser,
     }),
-    [handleLogin, loading, user],
+    [handleLogin, handleLogout, loading, user, handleGetUser],
   );
 
   return <Auth.Provider value={contextValues}>{children}</Auth.Provider>;

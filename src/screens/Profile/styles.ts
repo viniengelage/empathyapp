@@ -29,3 +29,9 @@ export const LogoutButtonText = styled.Text`
   font-size: ${RFValue(12)}px;
   color: ${({ theme }) => theme.colors.input_text};
 `;
+
+export const ModalContainer = styled.View`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+`;
