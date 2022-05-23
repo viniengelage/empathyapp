@@ -2,12 +2,13 @@ import styled, { css } from 'styled-components/native';
 
 import { RectButton } from 'react-native-gesture-handler';
 
-interface Props {
+interface IProps {
   isLoading?: boolean;
+  isActive?: boolean;
 }
 
-export const Container = styled(RectButton)<Props>`
-  width: 90%;
+export const Container = styled(RectButton)<IProps>`
+  width: 100%;
   height: 50px;
   background: ${({ theme }) => theme.colors.button};
   border-radius: 12px;
@@ -22,6 +23,12 @@ export const Container = styled(RectButton)<Props>`
     css`
       background: ${theme.colors.opacity_button};
     `};
+
+  ${({ isActive, theme }) =>
+    !isActive &&
+    css`
+      background: ${theme.colors.input_text};
+    `}
 `;
 
 export const Title = styled.Text`

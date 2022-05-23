@@ -5,6 +5,9 @@ import Login from 'screens/Login';
 import { useTheme } from 'styled-components';
 
 import { Ionicons } from '@expo/vector-icons';
+import { Home } from 'screens/Home';
+import { Feed } from 'screens/Feed';
+import { Profile } from 'screens/Profile';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -34,7 +37,7 @@ const AppRoutes = () => {
     >
       <Screen
         name="Feed"
-        component={Login}
+        component={Feed}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
             <Ionicons
@@ -48,7 +51,7 @@ const AppRoutes = () => {
       />
       <Screen
         name="Home"
-        component={Login}
+        component={Home}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
             <Ionicons
@@ -62,7 +65,7 @@ const AppRoutes = () => {
       />
       <Screen
         name="Perfil"
-        component={Login}
+        component={Profile}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
             <Ionicons

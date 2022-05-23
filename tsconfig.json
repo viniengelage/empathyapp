@@ -7,6 +7,9 @@
     "paths": {
       "styles/*": ["./global/styles/*"],
       "screens/*": ["./screens/*"],
+      "services/*": ["./services/*"],
+      "utils/*": ["./utils/*"],
+      "hooks/*":["./hooks/*"]
     }
   }
 }

@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useCallback,
+  useState,
+  useMemo,
+} from 'react';
 import {
   TextInput,
   TextInputProps,
@@ -7,13 +13,11 @@ import {
   TextInputFocusEventData,
   TextInputEndEditingEventData,
 } from 'react-native';
+
 import { useField } from '@unform/core';
-
 import { useTheme } from 'styled-components';
-
 import { Ionicons } from '@expo/vector-icons';
-
-import { Container, InputComponent, Icon } from './styles';
+import { Container, InputComponent, Icon, Error } from './styles';
 
 interface InputProps extends TextInputProps {
   name: string;
@@ -25,7 +29,7 @@ interface InputReference extends TextInput {
   value: string;
 }
 
-const Input = ({
+export const Input = ({
   name,
   placeholder,
   icon,
@@ -33,8 +37,14 @@ const Input = ({
   ...rest
 }: InputProps) => {
   const inputRef = useRef<InputReference>(null);
-  const { colors } = useTheme();
-  const { fieldName, registerField, defaultValue = '' } = useField(name);
+
+  const {
+    fieldName,
+    registerField,
+    defaultValue = '',
+    error,
+    clearError,
+  } = useField(name);
 
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -89,24 +99,32 @@ const Input = ({
     },
     [inputValue],
   );
-
   return (
-    <Container isFocused={isFocused} isFilled={isFilled}>
-      <Icon name={icon} isFocused={isFocused} isFilled={isFilled} />
-      <InputComponent
-        ref={inputRef}
-        onChangeText={handleChangeText}
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-        placeholderTextColor={isFocused ? colors.button : colors.input_text}
-        isFocused={isFocused}
-        isFilled={isFilled}
-        onFocus={() => setIsFocused(true)}
-        onEndEditing={handleInputBlur}
-        {...rest}
-      />
-    </Container>
+    <>
+      <Container isFocused={isFocused} isFilled={isFilled} isErrored={!!error}>
+        <Icon
+          name={icon}
+          isFocused={isFocused}
+          isFilled={isFilled}
+          isErrored={!!error}
+        />
+        <InputComponent
+          ref={inputRef}
+          onChangeText={handleChangeText}
+          defaultValue={defaultValue}
+          placeholder={placeholder}
+          isErrored={!!error}
+          isFocused={isFocused}
+          isFilled={isFilled}
+          onFocus={() => {
+            clearError();
+            setIsFocused(true);
+          }}
+          onEndEditing={handleInputBlur}
+          {...rest}
+        />
+      </Container>
+      {error && <Error>{error}</Error>}
+    </>
   );
 };
-
-export default Input;

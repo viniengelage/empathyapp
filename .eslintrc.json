@@ -26,6 +26,15 @@
         "prettier"
     ],
     "rules": {
+      "comma-dangle":"off",
+      "no-undef":"off",
+      "function-paren-newline":"off",
+      "react/jsx-one-expression-per-line":"off",
+      "no-template-curly-in-string":"off",
+      "react/jsx-curly-newline":"off",
+      "no-param-reassign":"off",
+      "no-nested-ternary":"off",
+      "react/style-prop-object":"off",
       "@typescript-eslint/no-empty-interface":"off",
       "react/require-default-props":"off",
       "react/no-unstable-nested-components":"off",
