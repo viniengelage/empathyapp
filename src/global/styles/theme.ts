@@ -19,4 +19,10 @@ export default {
     semiBold: 'Poppins_600SemiBold',
     bold: 'Poppins_700Bold',
   },
+  texts: {
+    default: 16,
+  },
+  styles: {
+    borderRadius: '6px',
+  },
 };

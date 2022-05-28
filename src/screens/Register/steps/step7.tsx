@@ -6,7 +6,7 @@ import { Button } from 'components/Buttons/Default';
 import { View } from 'react-native';
 import { ParamListBase } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Container, Description, FinalTitle, Image } from '../styles';
+import { Bold, Container, Description, FinalTitle, Image } from '../styles';
 
 export function Step7({
   navigation,
@@ -14,12 +14,21 @@ export function Step7({
 }: StackScreenProps<ParamListBase, 'Step7'>) {
   return (
     <Container>
-      <Image source={register7image} />
+      <Image
+        style={{
+          flex: 1,
+          height: undefined,
+          width: undefined,
+          alignSelf: 'stretch',
+        }}
+        source={register7image}
+        resizeMode="contain"
+      />
       <FinalTitle>Agora sim!</FinalTitle>
 
       <Description style={{ marginTop: 16 }}>
-        Seja bem vindo ao AppEmpatia, esperamos que possamos ajudar em sua
-        jornada para uma melhor perspectiva de vida!
+        Seja bem vindo ao <Bold>PATH</Bold>, esperamos que possamos ajudar em
+        sua jornada para uma melhor perspectiva de vida!
       </Description>
 
       <View

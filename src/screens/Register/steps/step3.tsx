@@ -29,7 +29,16 @@ export function Step3() {
         gosta, vamos lá?
       </Description>
 
-      <Image source={register4image} />
+      <Image
+        style={{
+          flex: 1,
+          height: undefined,
+          width: undefined,
+          alignSelf: 'stretch',
+        }}
+        source={register4image}
+        resizeMode="contain"
+      />
 
       <View
         style={{

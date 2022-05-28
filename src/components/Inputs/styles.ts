@@ -15,7 +15,7 @@ export const Container = styled.View<Props>`
   background: ${({ theme }) => theme.colors.innerBackground};
   width: 100%;
   height: 50px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.styles.borderRadius};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -77,7 +77,7 @@ const inputStyles = css<Props>`
   flex: 1;
   margin-left: 8px;
   line-height: 24px;
-  font-family: ${({ theme }) => theme.fonts.bold};
+  font-family: ${({ theme }) => theme.fonts.medium};
 
   ${({ isFocused, theme }) =>
     isFocused &&

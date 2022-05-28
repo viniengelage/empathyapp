@@ -9,7 +9,7 @@ export const Container = styled.TouchableOpacity<IProps>`
   width: 100%;
   height: 50px;
   background: ${({ theme }) => theme.colors.button};
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.styles.borderRadius};
 
   align-items: center;
   justify-content: center;

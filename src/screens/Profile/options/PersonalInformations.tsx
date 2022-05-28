@@ -5,11 +5,8 @@ import { Form } from 'styles/global';
 import { IconTitle } from 'components/IconTitle';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Mask } from 'components/Inputs/Mask';
-import Select from 'components/Inputs/Select';
+import { Select } from 'components/Inputs/Select';
 import dayjs from 'dayjs';
-import { Text } from 'react-native';
-
-import { RectButton as Fuck } from 'react-native-gesture-handler';
 import { Button } from 'components/Buttons/Default';
 import { api } from 'services/api';
 import { FormHandles } from '@unform/core';
@@ -26,6 +23,7 @@ export function PersonalInformations({ onFinish }: IProps) {
   const { user, getUser } = useAuth();
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [isEditable, setIsEditable] = useState<boolean>(false);
 
   const handleSubmit = useCallback(
     async data => {
@@ -62,6 +60,11 @@ export function PersonalInformations({ onFinish }: IProps) {
     },
     [getUser, onFinish],
   );
+
+  const handleNameFocus = () => {
+    formRef.current?.getFieldRef('name').focus();
+  };
+
   return (
     <Container>
       <IconTitle
@@ -80,11 +83,17 @@ export function PersonalInformations({ onFinish }: IProps) {
           genre: user.genre,
         }}
       >
-        <Input name="name" icon="person-outline" placeholder="Nome completo" />
+        <Input
+          name="name"
+          icon="person-outline"
+          placeholder="Nome completo"
+          editable={isEditable}
+        />
         <Mask
           name="birthday"
           icon="calendar-outline"
           placeholder="Data de nascimento"
+          editable={isEditable}
         />
         <Select
           name="genre"
@@ -94,14 +103,22 @@ export function PersonalInformations({ onFinish }: IProps) {
             { label: 'Feminino', value: 'female' },
             { label: 'Outro', value: 'other' },
           ]}
+          editable={isEditable}
         />
       </Form>
 
       <Button
-        title="Salvar"
+        title={isEditable ? 'Salvar' : 'Editar'}
         loading={loading}
         style={{ marginBottom: 32 }}
-        onPress={() => formRef.current?.submitForm()}
+        onPress={() => {
+          if (isEditable) {
+            formRef.current?.submitForm();
+          } else {
+            setIsEditable(true);
+            handleNameFocus();
+          }
+        }}
       />
     </Container>
   );

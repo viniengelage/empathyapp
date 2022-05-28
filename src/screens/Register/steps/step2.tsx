@@ -12,7 +12,7 @@ import register2image from 'assets/register2.png';
 
 import { Mask } from 'components/Inputs/Mask';
 import { Masks } from 'react-native-mask-input';
-import Select from 'components/Inputs/Select';
+import { ISelectReference, Select } from 'components/Inputs/Select';
 
 import { api } from 'services/api';
 import dayjs from 'dayjs';
@@ -29,6 +29,7 @@ interface IFormData {
 
 export function Step2() {
   const formRef = useRef<FormHandles>(null);
+  const selectRef = useRef<ISelectReference>(null);
   const { navigate } = useNavigation<Step2ScreenProp>();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -95,6 +96,11 @@ export function Step2() {
           placeholder="Telefone"
           icon="call-outline"
           mask={Masks.BRL_PHONE}
+          keyboardType="phone-pad"
+          returnKeyType="next"
+          onSubmitEditing={() =>
+            formRef.current?.getFieldRef('birthday').focus()
+          }
         />
 
         <Mask
@@ -102,9 +108,13 @@ export function Step2() {
           placeholder="Data de nascimento"
           icon="calendar-outline"
           mask={Masks.DATE_DDMMYYYY}
+          keyboardType="number-pad"
+          returnKeyType="next"
+          onSubmitEditing={() => selectRef.current?.open()}
         />
 
         <Select
+          ref={selectRef}
           name="genre"
           placeholder="Genero"
           options={[
@@ -121,7 +131,16 @@ export function Step2() {
         />
       </Form>
 
-      <Image source={register2image} />
+      <Image
+        style={{
+          flex: 1,
+          height: undefined,
+          width: undefined,
+          alignSelf: 'stretch',
+        }}
+        source={register2image}
+        resizeMode="contain"
+      />
     </Container>
   );
 }

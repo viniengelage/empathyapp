@@ -21,7 +21,7 @@ export const Description = styled.Text`
   margin-top: ${RFValue(64)}px;
   font-family: ${props => props.theme.fonts.regular};
   color: ${props => props.theme.colors.secundary};
-  font-size: ${RFValue(13)}px;
+  font-size: ${({ theme }) => RFValue(theme.texts.default)}px;
 `;
 
 export const Bold = styled.Text`

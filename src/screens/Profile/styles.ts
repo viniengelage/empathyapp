@@ -1,13 +1,16 @@
-import { RectButton } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
-export const ImageContainer = styled.View``;
+export const ImageContainer = styled.TouchableOpacity``;
 export const Image = styled.Image`
   width: ${RFValue(100)}px;
   height: ${RFValue(100)}px;
 
   border-radius: ${RFValue(50)}px;
+  margin-top: ${RFValue(48)}px;
+
+  border-color: ${({ theme }) => theme.colors.primary};
+  border-width: 4px;
 `;
 
 export const ProfileName = styled.Text`
@@ -17,7 +20,7 @@ export const ProfileName = styled.Text`
   color: ${({ theme }) => theme.colors.secundary};
 `;
 
-export const LogoutButton = styled(RectButton)`
+export const LogoutButton = styled.TouchableOpacity`
   flex: 1;
   justify-content: flex-end;
 

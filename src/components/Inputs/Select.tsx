@@ -1,6 +1,13 @@
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useImperativeHandle,
+  forwardRef,
+  Ref,
+} from 'react';
 import { useField } from '@unform/core';
-import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 
 import {
@@ -26,17 +33,22 @@ interface IProps {
   placeholder: string;
   name: string;
   options: IOptionsProps[];
+  editable?: boolean;
 }
 
-export default function Select({
-  placeholder: placeholderProp,
-  name,
-  options = [],
-}: IProps) {
+export interface ISelectReference {
+  open(): void;
+}
+
+function SelectComponent(
+  { placeholder: placeholderProp, name, options = [], editable = true }: IProps,
+  ref: Ref<ISelectReference>,
+) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const [placeholder, setPlaceholder] = useState<string>(placeholderProp);
   const [value, setValue] = useState<string>('');
+  const [isFilled, setIsFilled] = useState<boolean>(false);
 
   const { registerField, fieldName, defaultValue } = useField(name);
 
@@ -65,14 +77,29 @@ export default function Select({
     }
   }, [value, options]);
 
+  useImperativeHandle(ref, () => ({
+    open: () => {
+      setIsVisible(true);
+    },
+  }));
+
   return (
     <>
-      <ContainerButton onPress={() => setIsVisible(true)}>
-        <Icon name="chevron-down-outline" isFilled={!!value} />
-        <SelectInput isFilled={!!value}>{placeholder}</SelectInput>
+      <ContainerButton
+        onPress={() => {
+          setIsVisible(editable);
+        }}
+      >
+        <Icon name="chevron-down-outline" isFilled={isFilled} />
+        <SelectInput isFilled={isFilled}>{placeholder}</SelectInput>
       </ContainerButton>
 
-      <Modal isVisible={isVisible} style={{ alignItems: 'center' }}>
+      <Modal
+        isVisible={isVisible}
+        style={{ alignItems: 'center' }}
+        onBackButtonPress={() => setIsVisible(false)}
+        onModalHide={() => setIsFilled(!!value)}
+      >
         <ModalContainer>
           <OptionsHeader>
             <OptionHeaderTitle>Selecione uma opçao</OptionHeaderTitle>
@@ -101,3 +128,5 @@ export default function Select({
     </>
   );
 }
+
+export const Select = forwardRef(SelectComponent);

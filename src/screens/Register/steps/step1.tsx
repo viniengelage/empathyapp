@@ -87,6 +87,7 @@ export function Step1() {
           name="email"
           placeholder="E-mail"
           icon="at-outline"
+          keyboardType="email-address"
           returnKeyType="next"
           onSubmitEditing={() =>
             formRef.current?.getFieldRef('password').focus()
@@ -109,7 +110,16 @@ export function Step1() {
         />
       </Form>
 
-      <Image source={register1image} resizeMode="contain" />
+      <Image
+        style={{
+          flex: 1,
+          height: undefined,
+          width: undefined,
+          alignSelf: 'stretch',
+        }}
+        source={register1image}
+        resizeMode="contain"
+      />
     </Container>
   );
 }
