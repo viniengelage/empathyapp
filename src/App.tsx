@@ -1,15 +1,16 @@
 import 'react-native-gesture-handler';
 
 import React from 'react';
-
-import { ThemeProvider } from 'styled-components';
-import { NavigationContainer } from '@react-navigation/native';
-import { setLocale } from 'yup';
 import { StatusBar } from 'expo-status-bar';
-import defaultTheme from 'styles/theme';
+import { setLocale } from 'yup';
+import { ThemeProvider } from 'styled-components';
 
+import { AuthProvider } from 'hooks/auth';
 import { Routes } from 'routes';
-import { AuthProvider } from './hooks/auth';
+
+import defaultTheme from 'global/styles/theme';
+
+import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
   setLocale({

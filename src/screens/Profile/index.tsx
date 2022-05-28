@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
+import { Buffer } from 'buffer';
+import { StatusBar } from 'react-native';
 
 import * as FileSystem from 'expo-file-system';
 import * as ImagePicker from 'expo-image-picker';
 
-import { Container } from 'styles/global';
+import { Container } from 'global/styles/global';
 import { ChevronButton } from 'components/Buttons/Chevron';
 
-import { Buffer } from 'buffer';
-
-import profileImage from 'assets/profile-image.png';
-import { StatusBar } from 'react-native';
 import { api } from 'services/api';
-
-import fs from 'fs/promises';
-
 import emptyImage from 'assets/empty-profile-image.png';
 
-import axios from 'axios';
+import { FileSystemUploadType } from 'expo-file-system';
 import {
   Image,
   ImageContainer,
@@ -31,7 +26,7 @@ import { useAuth } from '../../hooks/auth';
 import { PersonalInformations } from './options/PersonalInformations';
 
 export function Profile() {
-  const { user, logout } = useAuth();
+  const { user, logout, getUser } = useAuth();
 
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
@@ -42,46 +37,29 @@ export function Profile() {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       quality: 1,
       aspect: [4, 3],
-      // base64: true,
     });
 
     if (!result.cancelled && result.uri) {
-      const byteCharacters = Buffer.from(result.uri, 'base64').toString();
-
-      const byteNumbers = new Array(byteCharacters.length);
-
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-      }
-
-      const ext = result.uri.substring(result.uri.lastIndexOf('.') + 1);
-
-      const fileName = result.uri.replace(/^.*[\\/]/, '');
-      const byteArray = new Uint8Array(byteNumbers);
-      const blob = new Blob([byteArray], {
-        type: `image/${ext}`,
-        filename: fileName,
-      });
-      // const fileInfo = await FileSystem.getInfoAsync(result.uri);
-
-      const formData = new FormData();
-
-      formData.append('avatar', blob);
-
-      console.log(formData);
-
-      // formData.append('avatar', blob);
+      const { uri } = result;
 
       try {
-        const response = await api.patch('/users/me/avatar', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
+        await FileSystem.uploadAsync(
+          `${api.defaults.baseURL}/users/me/avatar`,
+          uri,
+          {
+            headers: {
+              Authorization: api.defaults.headers.common
+                .Authorization as string,
+            },
+            uploadType: FileSystemUploadType.MULTIPART,
+            fieldName: 'avatar',
+            httpMethod: 'PATCH',
           },
-        });
+        );
 
-        console.log(response.data);
+        await getUser();
       } catch (error) {
-        // console.log(error.response, 'morre expo');
+        console.log(error);
       }
     }
   };
