@@ -118,7 +118,10 @@ export function Profile() {
       >
         <StatusBar backgroundColor="rgba(0,0,0,0.7)" barStyle="light-content" />
         <ModalContainer>
-          <PersonalInformations onFinish={() => setModalIsOpen(false)} />
+          <PersonalInformations
+            onFinish={() => setModalIsOpen(false)}
+            close={() => setModalIsOpen(false)}
+          />
         </ModalContainer>
       </Modal>
     </>

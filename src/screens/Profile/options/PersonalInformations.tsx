@@ -1,23 +1,25 @@
 import React, { useCallback, useRef, useState } from 'react';
 
-import { Input } from 'components/Inputs/Default';
-import { Form } from 'styles/global';
-import { IconTitle } from 'components/IconTitle';
+import dayjs from 'dayjs';
+import { FormHandles } from '@unform/core';
 import { RFValue } from 'react-native-responsive-fontsize';
+
+import { Input } from 'components/Inputs/Default';
+import { Form } from 'global/styles/global';
+import { IconTitle } from 'components/IconTitle';
 import { Mask } from 'components/Inputs/Mask';
 import { Select } from 'components/Inputs/Select';
-import dayjs from 'dayjs';
 import { Button } from 'components/Buttons/Default';
 import { api } from 'services/api';
-import { FormHandles } from '@unform/core';
-import { Container } from './styles';
-import { useAuth } from '../../../hooks/auth';
+import { useAuth } from 'hooks/auth';
+import { CloseContainer, CloseIcon, Container } from './styles';
 
 interface IProps {
   onFinish(): void;
+  close(): void;
 }
 
-export function PersonalInformations({ onFinish }: IProps) {
+export function PersonalInformations({ onFinish, close }: IProps) {
   const formRef = useRef<FormHandles>(null);
 
   const { user, getUser } = useAuth();
@@ -67,6 +69,10 @@ export function PersonalInformations({ onFinish }: IProps) {
 
   return (
     <Container>
+      <CloseContainer onPress={() => close()}>
+        <CloseIcon name="close-outline" />
+      </CloseContainer>
+
       <IconTitle
         title="Informações pessoais"
         icon="person-outline"
@@ -74,6 +80,7 @@ export function PersonalInformations({ onFinish }: IProps) {
           paddingTop: RFValue(16),
         }}
       />
+
       <Form
         onSubmit={handleSubmit}
         ref={formRef}
