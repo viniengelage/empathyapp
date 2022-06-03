@@ -17,6 +17,8 @@ import { useAuth } from '../../hooks/auth';
 import {
   Container,
   ImageContainer,
+  WelcomeTitle,
+  ButtonWrapper,
   RegisterContainer,
   RegisterText,
   RegisterButton,
@@ -50,6 +52,7 @@ const Login = () => {
       <ImageContainer>
         <WelcomeImage />
       </ImageContainer>
+      <WelcomeTitle>Seja bem vindo</WelcomeTitle>
       <Form
         ref={formRef}
         onSubmit={handleSubmit}
@@ -74,11 +77,13 @@ const Login = () => {
           returnKeyType="send"
           onSubmitEditing={() => formRef.current?.submitForm()}
         />
-        <Button
-          title="Fazer Login"
-          loading={loading}
-          onPress={() => formRef.current?.submitForm()}
-        />
+        <ButtonWrapper>
+          <Button
+            title="Fazer Login"
+            loading={loading}
+            onPress={() => formRef.current?.submitForm()}
+          />
+        </ButtonWrapper>
       </Form>
       <RegisterContainer>
         <RegisterText>Ainda não tem conta?</RegisterText>
