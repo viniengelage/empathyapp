@@ -13,6 +13,18 @@ export const Container = styled.View`
 
 export const ImageContainer = styled.View``;
 
+export const WelcomeTitle = styled.Text`
+  color: ${({ theme }) => theme.colors.button};
+  font-size: 28px;
+  font-family: ${({ theme }) => theme.fonts.semiBold};
+  margin-bottom: 10px;
+`;
+
+export const ButtonWrapper = styled.View`
+  width: 100%;
+  margin-top: 16px;
+`;
+
 export const RegisterContainer = styled.View`
   margin-top: 16px;
   align-items: center;
