@@ -50,7 +50,7 @@ const AuthProvider = ({ children }: IContextReference) => {
 
       setUser(data);
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   }, []);
 

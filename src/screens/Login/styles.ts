@@ -1,32 +1,45 @@
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
-
-// import { TouchableOpacity } from 'react-native';
 
 export const Container = styled.View`
   background: ${({ theme }) => theme.colors.background};
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+
+  flex: 1;
+  padding-top: ${RFValue(64)}px;
 `;
 
-export const ImageContainer = styled.View``;
-
+export const LogoContainer = styled.View`
+  width: 100%;
+  align-items: center;
+`;
 export const WelcomeTitle = styled.Text`
   color: ${({ theme }) => theme.colors.button};
   font-size: 28px;
   font-family: ${({ theme }) => theme.fonts.semiBold};
   margin-bottom: 10px;
+  text-align: center;
+
+  margin-top: ${RFValue(24)}px;
+`;
+
+export const Description = styled.Text`
+  color: ${({ theme }) => theme.colors.secundary};
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: left;
+  align-self: center;
+  width: 90%;
 `;
 
 export const ButtonWrapper = styled.View`
-  width: 100%;
+  width: 90%;
   margin-top: 16px;
+  align-self: center;
 `;
 
 export const RegisterContainer = styled.View`
-  margin-top: 16px;
+  margin: 16px 0 32px;
   align-items: center;
 `;
 
