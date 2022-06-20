@@ -8,7 +8,11 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "userInterfaceStyle": "automatic"
+    "userInterfaceStyle": "automatic",
+    "android": {
+      "package":"com.appempatia",
+      "googleServicesFile": "./google-services.json"
+    }
   },
   "plugins": [
     [

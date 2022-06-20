@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import {
   ScrollView,
@@ -10,7 +10,7 @@ import {
   Modal,
 } from 'react-native';
 
-import {Button} from '../../components/Buttons/Default';
+import { Button } from '../../components/Buttons/Default';
 
 const ForgotPassword = () => {
   const [value, setValue] = useState('');
@@ -29,26 +29,25 @@ const ForgotPassword = () => {
           autoconhecimento digite seu email nos campos abaixo para enviarmos um
           link para redefinir sua senha!
         </Text>
-        
-            <Input
-              name="email"
-              placeholder="E-mail"
-              icon="at-outline"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              
-            />
 
+        <Input
+          name="email"
+          placeholder="E-mail"
+          icon="at-outline"
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
 
         <Button title="Enviar email" onPress={handleSubmit} />
       </View>
       <Modal
         animationType="slide"
-        transparent={true}
+        transparent
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
-        }}>
+        }}
+      >
         <View style={styles.modalView}>
           <View>
             <Image
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
 
-  //styles Modal
+  // styles Modal
   modalView: {
     flex: 1,
     display: 'flex',

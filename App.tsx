@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { setLocale } from 'yup';
 import { ThemeProvider } from 'styled-components';
@@ -11,6 +11,15 @@ import { Routes } from 'routes';
 import defaultTheme from 'global/styles/theme';
 
 import { NavigationContainer } from '@react-navigation/native';
+import * as Notifications from 'expo-notifications';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 const App = () => {
   setLocale({

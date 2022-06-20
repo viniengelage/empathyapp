@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
 import { Buffer } from 'buffer';
-import { StatusBar } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 
 import * as FileSystem from 'expo-file-system';
 import * as ImagePicker from 'expo-image-picker';
@@ -65,13 +65,17 @@ export function Profile() {
   };
 
   const handleImage = async () => {
-    const response = await api.get('users/me/avatar', {
-      responseType: 'arraybuffer',
-    });
+    try {
+      const response = await api.get('users/me/avatar', {
+        responseType: 'arraybuffer',
+      });
 
-    const image = Buffer.from(response.data, 'binary').toString('base64');
+      const image = Buffer.from(response.data, 'binary').toString('base64');
 
-    setUserAvatar(`data:${response.headers['content-type']};base64,${image}`);
+      setUserAvatar(`data:${response.headers['content-type']};base64,${image}`);
+    } catch (error) {
+      setUserAvatar('');
+    }
   };
 
   useEffect(() => {
@@ -98,9 +102,10 @@ export function Profile() {
           icon="person-outline"
           onPress={() => setModalIsOpen(true)}
         />
-        <ChevronButton title="Dados de cadastro" icon="lock-closed-outline" />
+        <ChevronButton title="Dados de cadastro" icon="pencil-outline" />
         <ChevronButton title="Preferências" icon="options-outline" />
         <ChevronButton title="Desafios realizados" icon="rocket-outline" />
+        <ChevronButton title="Trocar senha" icon="lock-closed-outline" />
 
         <LogoutButton onPress={logout}>
           <LogoutButtonText>Sair</LogoutButtonText>

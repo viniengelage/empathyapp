@@ -1,6 +1,6 @@
 export default {
   colors: {
-    primary: '#440A67',
+    primary: '#A41BF8',
     secundary: '#252627',
     tertiary: '#BD6AF0',
     button: '#BD6AF0',

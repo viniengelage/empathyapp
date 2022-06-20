@@ -10,4 +10,5 @@ export interface IUserProps {
   genre: 'male' | 'female' | 'other';
   avatar: string;
   avatar_url: string;
+  push_token?: string;
 }

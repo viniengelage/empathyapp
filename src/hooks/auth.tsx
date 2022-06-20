@@ -7,6 +7,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import * as Notification from 'expo-notifications';
 import { api } from 'services/api';
 import { IUserProps } from 'types/user';
 
@@ -54,9 +55,26 @@ const AuthProvider = ({ children }: IContextReference) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   AsyncStorage.removeItem('@access_token');
-  // }, []);
+  const handleVerifyToken = useCallback(async () => {
+    const { data: token } = await Notification.getExpoPushTokenAsync();
+
+    if (!user.push_token || (user.push_token && user.push_token !== token)) {
+      try {
+        await api.put('/users', {
+          push_token: token,
+        });
+        console.log('feito');
+      } catch (error) {
+        console.log('hey', error.response);
+      }
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      handleVerifyToken();
+    }
+  }, [handleVerifyToken, user]);
 
   const handleGetUser = useCallback(async () => {
     const storagedToken = await AsyncStorage.getItem('@access_token');
@@ -68,10 +86,15 @@ const AuthProvider = ({ children }: IContextReference) => {
 
     api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
 
-    const { data } = await api.get('/users/me');
+    try {
+      const { data } = await api.get('/users/me');
 
-    setUser(data);
-    setLoading(false);
+      setUser(data);
+      setLoading(false);
+    } catch (error) {
+      console.log('hey from error');
+      console.log(error);
+    }
   }, []);
 
   const handleLogout = useCallback(async () => {

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "378199664712",
+    "project_id": "path-api-9f27a",
+    "storage_bucket": "path-api-9f27a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378199664712:android:d4894da4d63d93565ed07d",
+        "android_client_info": {
+          "package_name": "com.appempatia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378199664712-naqucbjf7mce3r4cqg6nm5fl31m3j1ai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsPrVisHq09yKaj6pb1Gl2DUEWMmw4dEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378199664712-naqucbjf7mce3r4cqg6nm5fl31m3j1ai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

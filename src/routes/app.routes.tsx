@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Home } from 'screens/Home';
 import { Feed } from 'screens/Feed';
 import { Profile } from 'screens/Profile';
+import { generateBoxShadowStyle } from 'utils/generateBoxShadow';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -15,23 +16,23 @@ const AppRoutes = () => {
   const { colors } = useTheme();
 
   const focusedIconStyle: StyleProp<TextStyle> = {
-    backgroundColor: colors.button,
+    backgroundColor: colors.background,
     padding: 8,
-    borderRadius: 60,
+    borderRadius: 30,
   };
 
   return (
     <Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: colors.background,
-        tabBarInactiveTintColor: colors.inactive_icon,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.background,
         tabBarShowLabel: false,
         tabBarStyle: {
           height: 60,
-          backgroundColor: colors.innerBackground,
-          borderTopRightRadius: 32,
-          borderTopLeftRadius: 32,
+          backgroundColor: colors.primary,
+          borderTopRightRadius: 16,
+          borderTopLeftRadius: 16,
         },
       }}
     >
