@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
-import type {Node} from 'react';
+
 import {
-  SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  Button,
   View,
   Image,
   Modal,
   Pressable,
 } from 'react-native';
+
+import {Button} from '../../components/Buttons/Default';
 
 const textCard = [
   {
@@ -32,12 +31,14 @@ const textCard = [
   },
 ];
 
-const App: () => Node = () => {
+interface cardProps {
+  title: string;
+  text: string;
+}
+
+const Challenges = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [textModal, setTextModal] = useState({
-    title: '',
-    text: '',
-  });
+  const [textModal, setTextModal] = useState<cardProps>({});
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <View style={styles.container}>
@@ -69,7 +70,6 @@ const App: () => Node = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
             setModalVisible(!modalVisible);
           }}>
           <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -89,11 +89,11 @@ const App: () => Node = () => {
                   <Text style={styles.textCard}>{textModal.title}</Text>
                 </View>
                 <Text style={styles.textModal}>{textModal.text}</Text>
-                <Pressable
-                  style={styles.buttonModal}
-                  onPress={() => setModalVisible(!modalVisible)}>
-                  <Text style={styles.buttonModalText}>Completar desafio</Text>
-                </Pressable>
+
+                <Button
+                  title="Completar desafio"
+                  onPress={() => setModalVisible(!modalVisible)}
+                />
               </View>
             </View>
           </ScrollView>
@@ -220,4 +220,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Challenges;
