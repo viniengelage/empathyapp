@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import { Button } from '../../components/Buttons/Default';
+import { Container, InputEmail, ModalView, Paragraph, Picture, PictureModal, TextCard,  } from './styles';
 
 const ForgotPassword = () => {
   const [value, setValue] = useState('');
@@ -21,16 +22,16 @@ const ForgotPassword = () => {
   };
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
-      <View style={styles.container}>
-        <Image style={styles.image} source={require('./img/cadeado.png')} />
-        <Text style={styles.paragraph}>Esqueceu a senha?</Text>
-        <Text style={styles.textCard}>
+      <Container>
+        <Picture source={require('./img/cadeado.png')} />
+        <Paragraph>Esqueceu a senha?</Paragraph>
+        <TextCard>
           Para que você consiga voltar a embarcar nessa jornada de
           autoconhecimento digite seu email nos campos abaixo para enviarmos um
           link para redefinir sua senha!
-        </Text>
+        </TextCard>
 
-        <Input
+        <InputEmail
           name="email"
           placeholder="E-mail"
           icon="at-outline"
@@ -39,7 +40,7 @@ const ForgotPassword = () => {
         />
 
         <Button title="Enviar email" onPress={handleSubmit} />
-      </View>
+      </Container>
       <Modal
         animationType="slide"
         transparent
@@ -48,82 +49,24 @@ const ForgotPassword = () => {
           setModalVisible(!modalVisible);
         }}
       >
-        <View style={styles.modalView}>
+        <ModalView>
           <View>
-            <Image
+            <PictureModal
               style={styles.imageModal}
               source={require('./img/email.png')}
             />
-            <Text style={styles.paragraphModal}>Email enviado!</Text>
-            <Text style={styles.textCard}>
+            <ParagraphModal>Email enviado!</ParagraphModal>
+            <TextCard>
               O email para redefinição de senha foi enviado, entre no link para
               definir uma nova senha e voltar a ter acesso a sua conta.
-            </Text>
+            </TextCard>
           </View>
           <Button title="Voltar" onPress={() => alert('Ir para home')} />
-        </View>
+        </ModalView>
       </Modal>
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    backgroundColor: '#FEFEFE',
-    alignItems: 'center',
-    padding: 8,
-  },
-  paragraph: {
-    color: '#440A67',
-    fontSize: 36,
-    width: 188,
-    fontWeight: '700',
-    textAlign: 'center',
-    marginTop: 40,
-    marginBottom: 40,
-  },
-  image: {
-    width: 64,
-    height: 64,
-    marginTop: 32,
-  },
-  textCard: {
-    color: '#252627',
-    fontSize: 18,
-    lineHeight: 25,
-    fontWeight: '400',
-    textAlign: 'left',
-  },
-  input: {
-    marginTop: 20,
-    marginBottom: 100,
-    borderWidth: 1,
-    borderRadius: 3,
-  },
-
-  // styles Modal
-  modalView: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    padding: 35,
-  },
-  paragraphModal: {
-    color: '#440A67',
-    fontSize: 36,
-    fontWeight: '700',
-    textAlign: 'center',
-    marginBottom: 40,
-  },
-  imageModal: {
-    width: 312,
-    height: 312,
-  },
-});
 
 export default ForgotPassword;
