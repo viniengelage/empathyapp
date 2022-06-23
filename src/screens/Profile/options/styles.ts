@@ -28,3 +28,11 @@ export const CloseIcon = styled(Ionicons)`
   font-size: ${RFValue(18)}px;
   color: ${({ theme }) => theme.colors.secundary};
 `;
+
+export const Description = styled.Text`
+  width: 100%;
+  margin-top: ${RFValue(64)}px;
+  font-family: ${props => props.theme.fonts.regular};
+  color: ${props => props.theme.colors.secundary};
+  font-size: ${({ theme }) => RFValue(theme.texts.default)}px;
+`;
