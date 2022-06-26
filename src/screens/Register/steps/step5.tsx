@@ -5,7 +5,7 @@ import { ParamListBase } from '@react-navigation/native';
 import { api } from 'services/api';
 import qs from 'qs';
 import { IActivityProps } from 'types/activity';
-import { Form } from 'styles/global';
+import { Form } from 'global/styles/global';
 import { Button } from 'components/Buttons/Default';
 import { Checkbox, ICheckboxOptionsProps } from 'components/Inputs/Checkbox';
 import { FormHandles } from '@unform/core';

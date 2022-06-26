@@ -14,6 +14,8 @@ import { StatusBar } from 'expo-status-bar';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Logo } from 'components/Svgs/Logo';
+import Toast from 'react-native-toast-message';
+import { Axios, AxiosError } from 'axios';
 import { useAuth } from '../../hooks/auth';
 import {
   Container,
@@ -34,16 +36,30 @@ const Login = () => {
   const { login } = useAuth();
   const { navigate } = useNavigation<LoginScreenProp>();
 
-  const [loading, setloading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = useCallback(
     async data => {
-      setloading(true);
-      await login({
-        email: data.email,
-        password: data.password,
-      });
-      setloading(false);
+      try {
+        setLoading(true);
+        await login({
+          email: data.email,
+          password: data.password,
+        });
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+
+        const axiosError = error as unknown as AxiosError;
+
+        if (axiosError.response && axiosError.response.status === 400) {
+          Toast.show({
+            type: 'error',
+            text1: 'E-mail ou senha incorretos',
+            text2: 'Verifique suas informações',
+          });
+        }
+      }
     },
     [login],
   );

@@ -10,6 +10,7 @@ import React, {
 import * as Notification from 'expo-notifications';
 import { api } from 'services/api';
 import { IUserProps } from 'types/user';
+import { useToast } from 'react-native-toast-notifications';
 
 interface IContextReference {
   children: JSX.Element | JSX.Element[];
@@ -35,30 +36,24 @@ const AuthProvider = ({ children }: IContextReference) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const handleLogin = useCallback(async ({ email, password }: ILoginProps) => {
-    try {
-      const {
-        data: { token },
-      } = await api.post('/auth/login', {
-        email,
-        password,
-      });
+    const {
+      data: { token },
+    } = await api.post('/auth/login', {
+      email,
+      password,
+    });
 
-      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+    api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-      await AsyncStorage.setItem('@access_token', token);
+    await AsyncStorage.setItem('@access_token', token);
 
-      const { data } = await api.get('/users/me');
+    const { data } = await api.get('/users/me');
 
-      setUser(data);
-    } catch (error) {
-      console.log(error.response);
-    }
+    setUser(data);
   }, []);
 
   const handleVerifyToken = useCallback(async () => {
     const { data: token } = await Notification.getExpoPushTokenAsync();
-
-    console.log(token);
 
     if (!user.push_token || (user.push_token && user.push_token !== token)) {
       try {

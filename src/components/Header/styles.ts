@@ -6,6 +6,7 @@ export const HeaderView = styled.View`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  padding-top: ${RFValue(16)}px;
 `;
 
 export const AvatarImage = styled.Image`
