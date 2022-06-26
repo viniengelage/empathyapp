@@ -35,35 +35,42 @@ const AuthProvider = ({ children }: IContextReference) => {
   const [user, setUser] = useState<IUserProps>({} as IUserProps);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const handleLogin = useCallback(async ({ email, password }: ILoginProps) => {
-    const {
-      data: { token },
-    } = await api.post('/auth/login', {
-      email,
-      password,
-    });
-
-    api.defaults.headers.common.Authorization = `Bearer ${token}`;
-
-    await AsyncStorage.setItem('@access_token', token);
-
-    const { data } = await api.get('/users/me');
-
-    setUser(data);
+  const handleLogout = useCallback(async () => {
+    await AsyncStorage.removeItem('@access_token');
+    setUser({} as IUserProps);
   }, []);
+
+  const handleLogin = useCallback(
+    async ({ email, password }: ILoginProps) => {
+      try {
+        const {
+          data: { token },
+        } = await api.post('/auth/login', {
+          email,
+          password,
+        });
+
+        api.defaults.headers.common.Authorization = `Bearer ${token}`;
+
+        await AsyncStorage.setItem('@access_token', token);
+
+        const { data } = await api.get('/users/me');
+
+        setUser(data);
+      } catch (error) {
+        await handleLogout();
+      }
+    },
+    [handleLogout],
+  );
 
   const handleVerifyToken = useCallback(async () => {
     const { data: token } = await Notification.getExpoPushTokenAsync();
 
     if (!user.push_token || (user.push_token && user.push_token !== token)) {
-      try {
-        await api.put('/users', {
-          push_token: token,
-        });
-        console.log('feito');
-      } catch (error) {
-        console.log('hey', error.response);
-      }
+      await api.put('/users', {
+        push_token: token,
+      });
     }
   }, [user]);
 
@@ -93,12 +100,6 @@ const AuthProvider = ({ children }: IContextReference) => {
       console.log(error);
     }
   }, []);
-
-  const handleLogout = useCallback(async () => {
-    await AsyncStorage.removeItem('@access_token');
-    setUser({} as IUserProps);
-  }, []);
-
   useEffect(() => {
     handleGetUser();
   }, [handleGetUser]);

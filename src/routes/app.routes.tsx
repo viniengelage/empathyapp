@@ -1,14 +1,13 @@
 import React from 'react';
 import { StyleProp, TextStyle } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Login from 'screens/Login';
 import { useTheme } from 'styled-components';
 
 import { Ionicons } from '@expo/vector-icons';
 import { Home } from 'screens/Home';
-import { Feed } from 'screens/Feed';
 import { Profile } from 'screens/Profile';
-import { generateBoxShadowStyle } from 'utils/generateBoxShadow';
+import FeedRoutes from './feed.routes';
+import ProfileRoutes from './profile.routes';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -37,8 +36,8 @@ const AppRoutes = () => {
       }}
     >
       <Screen
-        name="Feed"
-        component={Feed}
+        name="FeedRoutes"
+        component={FeedRoutes}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
             <Ionicons
@@ -65,8 +64,8 @@ const AppRoutes = () => {
         }}
       />
       <Screen
-        name="Perfil"
-        component={Profile}
+        name="ProfileRoutes"
+        component={ProfileRoutes}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
             <Ionicons
