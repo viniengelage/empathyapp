@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import {Button} from '../../components/Buttons/Default';
+import { ButtonArea, ButtonClose, ButtonImage, Card, CenteredView, CloseImage, Container, LineText, ModalView, Paragraph, Picture, TextArea, TextButton, TextCard, TextModal } from './styles';
 
 const textCard = [
   {
@@ -41,29 +42,27 @@ const Challenges = () => {
   const [textModal, setTextModal] = useState<cardProps>({});
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
-      <View style={styles.container}>
-        <Image style={styles.image} source={require('./foguetinho.png')} />
-        <Text style={styles.paragraph}>Desafios Realizados</Text>
+      <Container>
+        <Picture source={require('./foguetinho.png')} />
+        <Paragraph>Desafios Realizados</Paragraph>
 
-        {textCard.map(e => (
-          <Pressable
-            style={styles.card}
+        {TextCard.map(e => (
+          <Card
             onPress={() => {
               setTextModal(e);
               setModalVisible(true);
             }}>
-            <View style={styles.textArea}>
-              <View style={styles.lineText}></View>
-              <Text style={styles.textCard}>{e.title}</Text>
-            </View>
-            <View style={styles.buttonArea}>
-              <Text style={styles.textButton}>Ver desafio</Text>
-              <Image
-                style={styles.buttonImg}
+            <TextArea>
+              <LineText></LineText>
+              <TextCard>{e.title}</TextCard>
+            </TextArea>
+            <ButtonArea>
+              <TextButton>Ver desafio</TextButton>
+              <ButtonImage
                 source={require('./button.png')}
               />
-            </View>
-          </Pressable>
+            </ButtonArea>
+          </Card>
         ))}
         <Modal
           animationType="slide"
@@ -73,151 +72,34 @@ const Challenges = () => {
             setModalVisible(!modalVisible);
           }}>
           <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Pressable
-                  style={styles.buttonClose}
+            <CenteredView>
+              <ModalView>
+                <ButtonClose
                   onPress={() => setModalVisible(!modalVisible)}>
-                  <Image
-                    style={styles.closeImg}
+                  <CloseImage
                     source={require('./close.png')}
                   />
-                </Pressable>
+                </ButtonClose>
 
-                <View style={styles.textArea}>
-                  <View style={styles.lineText}></View>
-                  <Text style={styles.textCard}>{textModal.title}</Text>
-                </View>
-                <Text style={styles.textModal}>{textModal.text}</Text>
+                <TextArea>
+                  <LineText></LineText>
+                  <TextCard>{textModal.title}</TextCard>
+                </TextArea>
+                <TextModalal>{textModal.text}</TextModal>
 
                 <Button
                   title="Completar desafio"
                   onPress={() => setModalVisible(!modalVisible)}
                 />
-              </View>
-            </View>
+              </ModalView>
+            </CenteredView>
           </ScrollView>
         </Modal>
-      </View>
+      </Container>
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    backgroundColor: '#FEFEFE',
-    alignItems: 'center',
-    padding: 8,
-  },
-  paragraph: {
-    fontColor: '#252627',
-    fontSize: 26,
-    fontWeight: '700',
-    textAlign: 'center',
-    marginTop: 16,
-    marginBottom: 40,
-  },
-  image: {
-    width: 64,
-    height: 64,
-    marginTop: 32,
-  },
-  textCard: {
-    width: 230,
-    fontColor: '#252627',
-    fontSize: 18,
-    lineHeight: 20,
-    fontWeight: '400',
-    textAlign: 'left',
-  },
-  textArea: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  lineText: {
-    height: 80,
-    width: 4,
-    borderRadius: 6,
-    backgroundColor: '#440a67',
-    marginRight: 8,
-  },
-  card: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: 150,
-    width: '100%',
-    backgroundColor: '#F2F2F2',
-    boxShadow: '-4px 4px 4px -2px rgba(0, 0, 0, 0.19)',
-    borderRadius: 12,
-    marginBottom: 16,
-    padding: 20,
-  },
-  buttonArea: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginTop: 19,
-  },
-  textButton: {
-    color: '#996DA8',
-    fontSize: 18,
-    lineHeight: 18,
-    fontWeight: '500',
-  },
-  buttonImg: {
-    marginLeft: 8,
-    width: 18,
-    height: 18,
-  },
 
-  //styles Modal
-  centeredView: {
-    flex: 1,
-  },
-  modalView: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    padding: 35,
-  },
-  buttonClose: {
-    position: 'absolute',
-
-    right: 32,
-    top: 32,
-  },
-  closeImg: {
-    height: 13,
-    width: 13,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  textModal: {
-    textAlign: 'left',
-    marginTop: 30,
-    fontSize: 16,
-    color: '#252627',
-  },
-  buttonModal: {
-    backgroundColor: '#996DA8',
-    borderRadius: 20,
-    padding: 12,
-    marginTop: 40,
-  },
-  buttonModalText: {
-    color: '#FFF',
-    fontWeight: '700',
-    fontSize: 18,
-    textAlign: 'center',
-  },
-});
 
 export default Challenges;
