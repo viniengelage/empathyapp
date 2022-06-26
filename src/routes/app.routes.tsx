@@ -5,6 +5,7 @@ import { useTheme } from 'styled-components';
 
 import { Ionicons } from '@expo/vector-icons';
 import { Home } from 'screens/Home';
+import { Post } from 'screens/Post';
 import { Profile } from 'screens/Profile';
 import FeedRoutes from './feed.routes';
 import ProfileRoutes from './profile.routes';
@@ -48,6 +49,20 @@ const AppRoutes = () => {
             />
           ),
         }}
+      />
+      <Screen
+        name="Post"
+        component={Post}
+        // options={{
+        //   tabBarIcon: ({ size, color, focused }) => (
+        //     <Ionicons
+        //       name="file-tray-full"
+        //       size={size}
+        //       color={color}
+        //       style={focused && focusedIconStyle}
+        //     />
+        //   ),
+        // }}
       />
       <Screen
         name="Home"
