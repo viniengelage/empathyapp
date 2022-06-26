@@ -29,12 +29,20 @@ import { ChangePassword } from './options/ChangePassword';
 import { RegistrationData } from './options/RegistrationData';
 import { ChangeSchedule } from './options/ChangeSchedule';
 
+type ModalType =
+  | 'personal'
+  | 'register'
+  | 'preferences'
+  | 'challenges'
+  | 'password';
+
 export function Profile() {
   const { user, logout, getUser } = useAuth();
 
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const [userAvatar, setUserAvatar] = useState<string>('');
+  const [modalType, setModalType] = useState<ModalType>('personal');
 
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -83,15 +91,46 @@ export function Profile() {
         <ChevronButton
           title="Informações pessoais"
           icon="person-outline"
-          onPress={() => setModalIsOpen(true)}
+          onPress={() => {
+            setModalType('personal');
+            setModalIsOpen(true);
+          }}
         />
-        <ChevronButton title="Dados de cadastro" icon="pencil-outline" />
-        <ChevronButton title="Preferências" icon="options-outline" />
-        <ChevronButton title="Desafios realizados" icon="rocket-outline" />
-        <ChevronButton title="Trocar senha" icon="lock-closed-outline" />
+        <ChevronButton
+          title="Dados de cadastro"
+          icon="pencil-outline"
+          onPress={() => {
+            setModalType('register');
+            setModalIsOpen(true);
+          }}
+        />
+        <ChevronButton
+          title="Preferências"
+          icon="options-outline"
+          onPress={() => {
+            setModalType('preferences');
+            setModalIsOpen(true);
+          }}
+        />
+        <ChevronButton
+          title="Desafios realizados"
+          icon="rocket-outline"
+          onPress={() => {
+            setModalType('challenges');
+            setModalIsOpen(true);
+          }}
+        />
+        <ChevronButton
+          title="Trocar senha"
+          icon="lock-closed-outline"
+          onPress={() => {
+            setModalType('password');
+            setModalIsOpen(true);
+          }}
+        />
 
         <LogoutButton onPress={logout}>
-          <LogoutButtonText>Sair</LogoutButtonText>
+          <LogoutButtonText>Sair da conta</LogoutButtonText>
         </LogoutButton>
       </Container>
 
@@ -106,26 +145,36 @@ export function Profile() {
       >
         <StatusBar backgroundColor="rgba(0,0,0,0.7)" barStyle="light-content" />
         <ModalContainer>
-          {/* <PersonalInformations
-            onFinish={() => setModalIsOpen(false)}
-            close={() => setModalIsOpen(false)}
-          /> */}
-          {/* <ChangePreferences 
-            onFinish={() => setModalIsOpen(false)}
-            close={() => setModalIsOpen(false)} 
-          /> */}
-          {/* <ChangePassword
-            onFinish={() => setModalIsOpen(false)}
-            close={() => setModalIsOpen(false)} 
-          />  */}
-          {/* <RegistrationData 
-            onFinish={() => setModalIsOpen(false)}
-            close={() => setModalIsOpen(false)} 
-          /> */}
-          {/* <ChangeSchedule
-            onFinish={() => setModalIsOpen(false)}
-            close={() => setModalIsOpen(false)} 
-          /> */}
+          {modalType === 'personal' && (
+            <PersonalInformations
+              onFinish={() => setModalIsOpen(false)}
+              close={() => setModalIsOpen(false)}
+            />
+          )}
+          {/* {modalType === 'register' && (
+            <ChangePreferences
+              onFinish={() => setModalIsOpen(false)}
+              close={() => setModalIsOpen(false)}
+            />
+          )} */}
+          {modalType === 'password' && (
+            <ChangePassword
+              onFinish={() => setModalIsOpen(false)}
+              close={() => setModalIsOpen(false)}
+            />
+          )}
+          {modalType === 'register' && (
+            <RegistrationData
+              onFinish={() => setModalIsOpen(false)}
+              close={() => setModalIsOpen(false)}
+            />
+          )}
+          {modalType === 'preferences' && (
+            <ChangeSchedule
+              onFinish={() => setModalIsOpen(false)}
+              close={() => setModalIsOpen(false)}
+            />
+          )}
         </ModalContainer>
       </Modal>
     </>

@@ -15,8 +15,8 @@ import { CloseContainer, CloseIcon, Container } from './styles';
 type Step4ScreenProp = StackNavigationProp<any, 'Step4'>;
 
 interface IProps {
-    onFinish(): void;
-    close(): void;
+  onFinish(): void;
+  close(): void;
 }
 
 export function ChangePreferences({ onFinish, close }: IProps) {
@@ -58,9 +58,9 @@ export function ChangePreferences({ onFinish, close }: IProps) {
 
   return (
     <Container>
-        <CloseContainer onPress={() => close()}>
-            <CloseIcon name="close-outline" />
-        </CloseContainer>
+      <CloseContainer onPress={() => close()}>
+        <CloseIcon name="close-outline" />
+      </CloseContainer>
       <IconTitle
         title="O que você costuma fazer no seu tempo livre?"
         icon="bulb-outline"

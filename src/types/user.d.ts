@@ -5,7 +5,7 @@ export interface IUserProps {
   cellphone: string;
   birthday: string;
   role: string;
-  free_time: number;
+  free_time: string;
   points: number;
   genre: 'male' | 'female' | 'other';
   avatar: string;
