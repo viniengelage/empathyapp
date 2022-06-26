@@ -24,6 +24,10 @@ import {
 
 import { useAuth } from '../../hooks/auth';
 import { PersonalInformations } from './options/PersonalInformations';
+import { ChangePreferences } from './options/ChangePreferences';
+import { ChangePassword } from './options/ChangePassword';
+import { RegistrationData } from './options/RegistrationData';
+import { ChangeSchedule } from './options/ChangeSchedule';
 
 export function Profile() {
   const { user, logout, getUser } = useAuth();
@@ -124,9 +128,25 @@ export function Profile() {
       >
         <StatusBar backgroundColor="rgba(0,0,0,0.7)" barStyle="light-content" />
         <ModalContainer>
-          <PersonalInformations
+          {/* <PersonalInformations
             onFinish={() => setModalIsOpen(false)}
             close={() => setModalIsOpen(false)}
+          /> */}
+          {/* <ChangePreferences 
+            onFinish={() => setModalIsOpen(false)}
+            close={() => setModalIsOpen(false)} 
+          /> */}
+          {/* <ChangePassword
+            onFinish={() => setModalIsOpen(false)}
+            close={() => setModalIsOpen(false)} 
+          />  */}
+          {/* <RegistrationData 
+            onFinish={() => setModalIsOpen(false)}
+            close={() => setModalIsOpen(false)} 
+          /> */}
+          <ChangeSchedule
+            onFinish={() => setModalIsOpen(false)}
+            close={() => setModalIsOpen(false)} 
           />
         </ModalContainer>
       </Modal>

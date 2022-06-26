@@ -38,3 +38,12 @@ export const ModalContainer = styled.View`
   bottom: 0;
   width: 100%;
 `;
+
+export const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 0 ${RFValue(20)}px 0;
+  background: ${props => props.theme.colors.background};
+`;

@@ -52,7 +52,7 @@ export function ChangePassword({ onFinish, close }: IProps) {
   return (
     <Container>
         <CloseContainer onPress={() => close()}>
-        <CloseIcon name="close-outline" />
+            <CloseIcon name="close-outline" />
         </CloseContainer>
 
         <IconTitle

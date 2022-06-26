@@ -10,7 +10,6 @@ export const Container = styled.View`
   justify-content: center;
 
   padding: 0 16px;
-
   border-top-left-radius: ${RFValue(16)}px;
   border-top-right-radius: ${RFValue(16)}px;
 
@@ -31,8 +30,9 @@ export const CloseIcon = styled(Ionicons)`
 
 export const Description = styled.Text`
   width: 100%;
-  margin-top: ${RFValue(64)}px;
+  margin-top: ${RFValue(44)}px;
   font-family: ${props => props.theme.fonts.regular};
   color: ${props => props.theme.colors.secundary};
   font-size: ${({ theme }) => RFValue(theme.texts.default)}px;
 `;
+

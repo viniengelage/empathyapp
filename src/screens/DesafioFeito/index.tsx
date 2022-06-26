@@ -85,7 +85,7 @@ const Challenges = () => {
                   <LineText></LineText>
                   <TextCard>{textModal.title}</TextCard>
                 </TextArea>
-                <TextModalal>{textModal.text}</TextModal>
+                <TextModal>{textModal.text}</TextModal>
 
                 <Button
                   title="Completar desafio"
