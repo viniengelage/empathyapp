@@ -31,8 +31,8 @@ const AppRoutes = () => {
         tabBarStyle: {
           height: 60,
           backgroundColor: colors.primary,
-          borderTopRightRadius: 16,
-          borderTopLeftRadius: 16,
+          borderTopRightRadius: 6,
+          borderTopLeftRadius: 6,
         },
       }}
     >

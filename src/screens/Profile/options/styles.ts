@@ -25,7 +25,7 @@ export const CloseContainer = styled.TouchableOpacity`
 `;
 
 export const CloseIcon = styled(Ionicons)`
-  font-size: ${RFValue(18)}px;
+  font-size: ${RFValue(32)}px;
   color: ${({ theme }) => theme.colors.secundary};
 `;
 

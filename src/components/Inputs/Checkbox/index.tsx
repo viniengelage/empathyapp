@@ -42,6 +42,12 @@ export function Checkbox({ name, options = [], onSelect, isFilled }: IProps) {
     }
   }, [values, isFilled]);
 
+  useEffect(() => {
+    if (options.length > 0) {
+      console.log('hey', options);
+    }
+  }, []);
+
   return (
     <Container>
       {options.map(option => (
@@ -62,7 +68,11 @@ export function Checkbox({ name, options = [], onSelect, isFilled }: IProps) {
           <IconContainer
             isFocused={values.some(value => value.id === option.id)}
           >
-            <IconImage source={image} />
+            <IconImage
+              source={{
+                uri: option.icon,
+              }}
+            />
           </IconContainer>
           <Placeholder isFocused={values.some(value => value.id === option.id)}>
             {option.placeholder}

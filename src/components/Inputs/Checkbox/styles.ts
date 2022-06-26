@@ -35,7 +35,10 @@ export const IconContainer = styled.View<IProps>`
     `}
 `;
 
-export const IconImage = styled.Image``;
+export const IconImage = styled.Image`
+  width: 75px;
+  height: 75px;
+`;
 
 export const Placeholder = styled.Text<IProps>`
   font-size: ${RFValue(14)}px;

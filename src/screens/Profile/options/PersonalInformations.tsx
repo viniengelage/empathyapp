@@ -25,7 +25,6 @@ export function PersonalInformations({ onFinish, close }: IProps) {
   const { user, getUser } = useAuth();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [isEditable, setIsEditable] = useState<boolean>(false);
 
   const handleSubmit = useCallback(
     async data => {
@@ -63,10 +62,6 @@ export function PersonalInformations({ onFinish, close }: IProps) {
     [getUser, onFinish],
   );
 
-  const handleNameFocus = () => {
-    formRef.current?.getFieldRef('name').focus();
-  };
-
   return (
     <Container>
       <CloseContainer onPress={() => close()}>
@@ -90,17 +85,11 @@ export function PersonalInformations({ onFinish, close }: IProps) {
           genre: user.genre,
         }}
       >
-        <Input
-          name="name"
-          icon="person-outline"
-          placeholder="Nome completo"
-          editable={isEditable}
-        />
+        <Input name="name" icon="person-outline" placeholder="Nome completo" />
         <Mask
           name="birthday"
           icon="calendar-outline"
           placeholder="Data de nascimento"
-          editable={isEditable}
         />
         <Select
           name="genre"
@@ -110,22 +99,14 @@ export function PersonalInformations({ onFinish, close }: IProps) {
             { label: 'Feminino', value: 'female' },
             { label: 'Outro', value: 'other' },
           ]}
-          editable={isEditable}
         />
       </Form>
 
       <Button
-        title={isEditable ? 'Salvar' : 'Editar'}
+        title="Salvar"
         loading={loading}
         style={{ marginBottom: 32 }}
-        onPress={() => {
-          if (isEditable) {
-            formRef.current?.submitForm();
-          } else {
-            setIsEditable(true);
-            handleNameFocus();
-          }
-        }}
+        onPress={() => formRef.current?.submitForm()}
       />
     </Container>
   );

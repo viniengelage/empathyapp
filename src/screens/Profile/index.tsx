@@ -63,34 +63,12 @@ export function Profile() {
       }
     }
   };
-
-  const handleImage = async () => {
-    try {
-      const response = await api.get('users/me/avatar', {
-        responseType: 'arraybuffer',
-      });
-
-      const image = Buffer.from(response.data, 'binary').toString('base64');
-
-      setUserAvatar(`data:${response.headers['content-type']};base64,${image}`);
-    } catch (error) {
-      console.log(error, 'erro');
-      setUserAvatar('');
-    }
-  };
-
-  useEffect(() => {
-    if (user) {
-      handleImage();
-    }
-  }, [user]);
-
   return (
     <>
       <Container>
         <ImageContainer onPress={pickImage}>
-          {userAvatar ? (
-            <Image source={{ uri: userAvatar }} />
+          {user && user.avatar_url ? (
+            <Image source={{ uri: user.avatar_url }} />
           ) : (
             <Image source={emptyImage} />
           )}
