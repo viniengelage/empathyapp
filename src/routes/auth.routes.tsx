@@ -3,7 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from 'screens/Login';
 import RegisterRoutes from 'routes/register.routes';
-import ChallengesAccomplished from 'screens/ChallengesAccomplished/index';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -15,7 +14,6 @@ const AuthRoutes = () => (
   >
     <Screen name="Login" component={Login} />
     <Screen name="Register" component={RegisterRoutes} />
-    <Screen name="ChallengesAccomplished" component={ChallengesAccomplished} />
   </Navigator>
 );
 
