@@ -13,6 +13,8 @@ import { api } from 'services/api';
 import emptyImage from 'assets/empty-profile-image.png';
 
 import { FileSystemUploadType } from 'expo-file-system';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import {
   Image,
   ImageContainer,
@@ -36,9 +38,13 @@ type ModalType =
   | 'challenges'
   | 'password';
 
+type ChallengesAccomplishedScreenProp = StackNavigationProp<
+  any,
+  'ChallengesAccomplished'
+>;
 export function Profile() {
   const { user, logout, getUser } = useAuth();
-
+  const { navigate } = useNavigation<ChallengesAccomplishedScreenProp>();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const [userAvatar, setUserAvatar] = useState<string>('');
@@ -116,8 +122,7 @@ export function Profile() {
           title="Desafios realizados"
           icon="rocket-outline"
           onPress={() => {
-            setModalType('challenges');
-            setModalIsOpen(true);
+            navigate('ChallengesAccomplished');
           }}
         />
         <ChevronButton
