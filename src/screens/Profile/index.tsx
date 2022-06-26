@@ -144,10 +144,10 @@ export function Profile() {
             onFinish={() => setModalIsOpen(false)}
             close={() => setModalIsOpen(false)} 
           /> */}
-          <ChangeSchedule
+          {/* <ChangeSchedule
             onFinish={() => setModalIsOpen(false)}
             close={() => setModalIsOpen(false)} 
-          />
+          /> */}
         </ModalContainer>
       </Modal>
     </>
