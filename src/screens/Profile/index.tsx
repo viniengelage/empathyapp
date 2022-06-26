@@ -74,6 +74,7 @@ export function Profile() {
 
       setUserAvatar(`data:${response.headers['content-type']};base64,${image}`);
     } catch (error) {
+      console.log(error, 'erro');
       setUserAvatar('');
     }
   };

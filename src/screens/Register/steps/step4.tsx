@@ -6,7 +6,7 @@ import { Button } from 'components/Buttons/Default';
 import { api } from 'services/api';
 import { Checkbox, ICheckboxOptionsProps } from 'components/Inputs/Checkbox';
 import { ICategoryProps } from 'types/category';
-import { Form } from 'styles/global';
+import { Form } from 'global/styles/global';
 import { FormHandles } from '@unform/core';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';

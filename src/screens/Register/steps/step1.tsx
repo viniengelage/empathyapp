@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 
 import { Input } from 'components/Inputs/Default';
-import { Form } from 'styles/global';
+import { Form } from 'global/styles/global';
 import { Button } from 'components/Buttons/Default';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
@@ -34,7 +34,7 @@ export function Step1() {
       try {
         const schema = Yup.object().shape({
           name: Yup.string().required(),
-          email: Yup.string().required(),
+          email: Yup.string().email().required(),
           password: Yup.string().min(8),
         });
 
@@ -55,6 +55,7 @@ export function Step1() {
 
         navigate('Step2');
       } catch (error) {
+        console.log('è um erro', error);
         setLoading(false);
 
         const errors = getValidationErrors(error);

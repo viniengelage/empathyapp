@@ -58,6 +58,8 @@ const AuthProvider = ({ children }: IContextReference) => {
   const handleVerifyToken = useCallback(async () => {
     const { data: token } = await Notification.getExpoPushTokenAsync();
 
+    console.log(token);
+
     if (!user.push_token || (user.push_token && user.push_token !== token)) {
       try {
         await api.put('/users', {
