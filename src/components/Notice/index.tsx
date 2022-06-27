@@ -38,7 +38,7 @@ export function Notice({ post }: IProps) {
 
       <MoreInformation>
         <TouchableOpacity onPress={() => navigate('Post', { id: post.id })}>
-          <Text style={{ fontFamily: fonts.light }}>Ir para o desafio</Text>
+          <Text style={{ fontFamily: fonts.light }}>Saiba mais</Text>
           <Ionicons
             name="arrow-redo-outline"
             size={18}

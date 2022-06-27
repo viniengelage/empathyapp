@@ -4,6 +4,7 @@ import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 import { api } from 'services/api';
 import { Container } from 'styles/global';
 import {
+  Icon,
   PostTitle,
   ImageContainer,
   PostImage,
@@ -24,6 +25,7 @@ interface Post {
   description: string;
   content: string;
   thumbnail_url: string;
+  see_more_url: string;
 }
 
 export function Post({ route }: StackScreenProps<ParamListBase, 'Post'>) {
@@ -42,6 +44,7 @@ export function Post({ route }: StackScreenProps<ParamListBase, 'Post'>) {
 
   return (
     <Container>
+      <Icon name="arrow-back-outline" onPress={() => navigate('Feed')} />
       <PostTitle>{post?.title}</PostTitle>
       <ImageContainer>
         {post?.thumbnail_url ? (
@@ -52,9 +55,7 @@ export function Post({ route }: StackScreenProps<ParamListBase, 'Post'>) {
         <TitlePost>{post?.description}</TitlePost>
       </TitleContainer>
       <DescriptionPost>{post?.content}</DescriptionPost>
-      <ButtonMoreDetails onPress={() => navigate('Feed')}>
-        Saiba mais
-      </ButtonMoreDetails>
+      <ButtonMoreDetails> Saiba mais </ButtonMoreDetails>
     </Container>
   );
 }
