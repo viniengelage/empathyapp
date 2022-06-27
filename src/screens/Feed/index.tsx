@@ -3,13 +3,7 @@ import { Container } from 'global/styles/global';
 import { Notice } from 'components/Notice';
 import { api } from 'services/api';
 import { Header } from 'components/Header';
-import {
-  ContainerScroll,
-  Title,
-  ImageContainer,
-  Image,
-  FeedTitle,
-} from './styles';
+import { ContainerScroll } from './styles';
 
 export function Feed() {
   const [posts, setPosts] = useState([]);
@@ -28,8 +22,9 @@ export function Feed() {
     <Container style={{ alignItems: 'flex-start' }}>
       <ContainerScroll>
         <Header />
-        {posts?.map(post => (
-          <Notice post={post} />
+        {posts?.map((post, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Notice post={post} key={index} />
         ))}
       </ContainerScroll>
     </Container>

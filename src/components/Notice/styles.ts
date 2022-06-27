@@ -22,13 +22,13 @@ export const Image = styled.Image`
 export const NoticeTitle = styled.Text`
   margin-top: 5px;
   color: ${({ theme }) => theme.colors.button};
-  font-size: 14px;
+  font-size: ${RFValue(18)}px;
   font-family: ${({ theme }) => theme.fonts.medium};
 `;
 
 export const NoticeMessage = styled.Text`
   color: ${({ theme }) => theme.colors.secundary};
-  font-size: 12px;
+  font-size: ${RFValue(14)}px;
   font-family: ${({ theme }) => theme.fonts.medium};
   margin: 10px 0;
 `;

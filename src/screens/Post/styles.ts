@@ -1,4 +1,6 @@
 import styled from 'styled-components/native';
+import { Ionicons } from '@expo/vector-icons';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export const PostTitle = styled.Text`
   color: ${({ theme }) => theme.colors.primary};
@@ -50,4 +52,12 @@ export const ButtonMoreDetails = styled.Text`
   color: #996da8;
   font-size: 18px;
   font-family: ${({ theme }) => theme.fonts.bold};
+`;
+
+export const Icon = styled(Ionicons)`
+  position: absolute;
+  top: ${RFValue(40)}px;
+  left: 20px;
+  font-size: ${RFValue(24)}px;
+  color: #9e9e9e;
 `;
