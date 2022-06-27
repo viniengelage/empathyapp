@@ -1,132 +1,119 @@
-import styled from 'styled-components/native'
+import { Ionicons } from '@expo/vector-icons';
+import styled from 'styled-components/native';
 
-export const Container =styled.View`
-    display: 'flex';
-    flex-Direction: 'column';
-    flex: 1;
-    background-Color: '#FEFEFE';
-    align-Items: 'center';
-    padding: 8;
+export const Container = styled.View`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: ${({ theme }) => theme.colors.background};
+  align-items: center;
+  padding: 8px;
 `;
 
 export const Picture = styled.Image`
-    width: 64;
-    height: 64;
-    margin-Top: 32;
+  width: 64px;
+  height: 64px;
+  margin-top: 32px;
 `;
 
 export const Paragraph = styled.Text`
-    color: '#252627';
-    font-Size: 26;
-    font-Weight: '700';
-    text-Align: 'center';
-    margin-Top: 16;
-    margin-Bottom: 40;
+  color: ${({ theme }) => theme.colors.secundary};
+  font-size: 26px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 40px;
 `;
 
 export const TextCard = styled.Text`
-    width: 230;
-    color: '#252627';
-    font-Size: 18;
-    line-Height: 20;
-    font-Weight: '400';
-    text-Align: 'left';
+  width: 230px;
+  color: ${({ theme }) => theme.colors.secundary};
+  font-size: 18px;
+  line-height: 20px;
+  font-family: ${({ theme }) => theme.fonts.light};
+  text-align: left;
 `;
 
 export const TextArea = styled.View`
-    display: 'flex';
-    flex-Direction: 'row';
-    align-Items: 'center';
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const LineText = styled.View`
-    height: 80;
-    width: 4;
-    border-Radius: 6;
-    background-Color: '#440a67';
-    margin-Right: 8;
+  height: 80px;
+  width: 4px;
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors.primary};
+  margin-right: 8px;
 `;
 
 export const Card = styled.Pressable`
-    display: 'flex';
-    flex-Direction: 'column';
-    min-Height: 150;
-    width: '100%';
-    background-Color: '#F2F2F2';
-    box-Shadow: '-4px 4px 4px -2px rgba(0, 0, 0, 0.19)';
-    border-Radius: 12;
-    margin-Bottom: 16;
-    padding: 20;
+  display: flex;
+  flex-direction: column;
+  min-height: 150px;
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.background};
+  border-radius: 12px;
+  margin-bottom: 16px;
+  padding: 20px;
 `;
 
 export const ButtonArea = styled.View`
-    display: 'flex';
-    flex-Direction: 'row';
-    justify-Content: 'flex-end';
-    align-Items: 'center';
-    margin-Top: 19;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
 `;
 
 export const TextButton = styled.Text`
-    color: '#996DA8';
-    font-Size: 18;
-    line-Height: 18;
-    font-Weight: '500';
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 18px;
+  line-height: 18px;
+  font-family: ${({ theme }) => theme.fonts.medium};
 `;
 
-export const ButtonImage = styled.Image`
-    margin-Left: 8;
-    width: 18;
-    height: 18;
+export const ButtonImage = styled(Ionicons)`
+  font-size: 18px;
+  margin-left: 8px;
+  color: ${({ theme }) => theme.colors.button};
 `;
 
-//styles Modal
+// styles Modal
 
 export const CenteredView = styled.View`
-    flex: 1;
+  flex: 1;
+  /*   height: 80vh; */
 `;
 
 export const ModalView = styled.View`
-    flex: 1;
-    display: 'flex';
-    flex-Direction: 'column';
-    background-Color: 'white';
-    padding: 35;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.background};
+  padding: 35px;
 `;
 
 export const ButtonClose = styled.Pressable`
-    position: 'absolute';
-    right: 32;
-    top: 32;
+  position: absolute;
+  right: 32px;
+  top: 32px;
 `;
 
-export const CloseImage = styled.Image`
-    height: 13;
-    width: 13;
+export const CloseImage = styled(Ionicons)`
+  font-size: 18px;
+  color: ${({ theme }) => theme.colors.button};
 `;
 
 export const ModalText = styled.Text`
-    margin-Bottom: 15;
-    text-Align: 'center';
+  margin-bottom: 15px;
+  text-align: center;
 `;
 
 export const TextModal = styled.Text`
-    text-Align: 'left';
-    margin-Top: 30;
-    font-Size: 16;
-    color: '#252627';
-`;
-
-export const ButtonModal = styled.Pressable`
-    background-Color: '#996DA8';
-    border-Radius: 20;
-    padding: 12;
-    margin-Top: 40;
-`;
-
-export const ButtonModalText = styled.Text`
-    color: '#FFF';
-    font-Weight: '700';
-    font-Size: 18;
-    text-Align: 'center';
+  text-align: left;
+  margin-top: 30px;
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.secundary};
 `;

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { IconTitle } from 'components/IconTitle';
+import React, { useEffect, useState } from 'react';
 
 import {
   ScrollView,
@@ -9,6 +11,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
+import { api } from 'services/api';
 
 import { Button } from '../../components/Buttons/Default';
 import {
@@ -33,30 +36,48 @@ interface cardProps {
   title: string;
   text: string;
 }
-
 export const ChallengesAccomplished = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [textModal, setTextModal] = useState<cardProps>({});
+
+  const [challenges, setChallenges] = useState([]);
+  const [selectedChallenge, setSelectedChallenge] = useState<cardProps>();
+
+  useEffect(() => {
+    async function getChallenge() {
+      const response = await api.get('/challenges/users/me');
+      setChallenges(response.data);
+      console.log(response.data);
+    }
+
+    getChallenge();
+  }, []);
+  useEffect(() => {
+    console.log(challenges);
+  }, []);
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <Container>
-        <Picture source={require('./foguetinho.png')} />
-        <Paragraph>Desafios Realizados</Paragraph>
-        <Card
-          onPress={() => {
-            setTextModal(e);
-            setModalVisible(true);
-          }}
-        >
-          <TextArea>
-            <LineText />
-            <TextCard>{e.title}</TextCard>
-          </TextArea>
-          <ButtonArea>
-            <TextButton>Ver desafio</TextButton>
-            <ButtonImage source={require('./button.png')} />
-          </ButtonArea>
-        </Card>
+        <IconTitle title="Desafios Realizados" icon="rocket-outline" />
+
+        {challenges.map(challenge => (
+          <Card
+            key={challenge.id}
+            onPress={() => {
+              setSelectedChallenge(challenge);
+              setModalVisible(true);
+            }}
+          >
+            <TextArea>
+              <LineText />
+              <TextCard>{challenge.title}</TextCard>
+            </TextArea>
+            <ButtonArea>
+              <TextButton>Ver desafio</TextButton>
+              <ButtonImage name="arrow-redo-outline" />
+            </ButtonArea>
+          </Card>
+        ))}
+
         <Modal
           animationType="slide"
           transparent
@@ -69,14 +90,14 @@ export const ChallengesAccomplished = () => {
             <CenteredView>
               <ModalView>
                 <ButtonClose onPress={() => setModalVisible(!modalVisible)}>
-                  <CloseImage source={require('./close.png')} />
+                  <CloseImage name="close-outline" />
                 </ButtonClose>
 
                 <TextArea>
                   <LineText />
-                  <TextCard>{textModal.title}</TextCard>
+                  <TextCard>{selectedChallenge?.title}</TextCard>
                 </TextArea>
-                <TextModal>{textModal.text}</TextModal>
+                <TextModal>{selectedChallenge?.text}</TextModal>
 
                 <Button
                   title="Completar desafio"
