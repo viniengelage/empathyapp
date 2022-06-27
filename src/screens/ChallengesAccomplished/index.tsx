@@ -1,17 +1,14 @@
 import { Ionicons } from '@expo/vector-icons';
+import { ChallengeCard } from 'components/Challenge';
 import { IconTitle } from 'components/IconTitle';
+import { ChallengeModal } from 'components/Modals/Challenge';
+import { Container } from 'global/styles/global';
 import React, { useEffect, useState } from 'react';
 
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Modal,
-  Pressable,
-} from 'react-native';
+import { ScrollView, StatusBar } from 'react-native';
 import { api } from 'services/api';
+import { IChallengeProps, IUserChallengeProps } from 'types/challenge';
+import Modal from 'react-native-modal';
 
 import { Button } from '../../components/Buttons/Default';
 import {
@@ -21,8 +18,8 @@ import {
   Card,
   CenteredView,
   CloseImage,
-  Container,
   LineText,
+  ModalContainer,
   ModalView,
   Paragraph,
   Picture,
@@ -32,82 +29,74 @@ import {
   TextModal,
 } from './styles';
 
-interface cardProps {
-  title: string;
-  text: string;
-}
 export const ChallengesAccomplished = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const [challenges, setChallenges] = useState([]);
-  const [selectedChallenge, setSelectedChallenge] = useState<cardProps>();
+  const [challenges, setChallenges] = useState<IUserChallengeProps[]>([]);
+  const [visibleModal, setVisibleModal] = useState<boolean>(false);
+  const [selectedUserChallenge, setUserChallenge] =
+    useState<IUserChallengeProps>({} as IUserChallengeProps);
 
   useEffect(() => {
     async function getChallenge() {
-      const response = await api.get('/challenges/users/me');
-      setChallenges(response.data);
-      console.log(response.data);
+      const { data } = await api.get('/challenges/users/me');
+
+      const userChallenges = data as unknown as IUserChallengeProps[];
+
+      setChallenges(userChallenges.filter(ch => ch.is_completed));
     }
 
     getChallenge();
   }, []);
-  useEffect(() => {
-    console.log(challenges);
-  }, []);
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic">
-      <Container>
-        <IconTitle title="Desafios Realizados" icon="rocket-outline" />
+    <Container>
+      <IconTitle title="Desafios Realizados" icon="rocket-outline" />
 
-        {challenges.map(challenge => (
-          <Card
-            key={challenge.id}
-            onPress={() => {
-              setSelectedChallenge(challenge);
-              setModalVisible(true);
-            }}
-          >
-            <TextArea>
-              <LineText />
-              <TextCard>{challenge.title}</TextCard>
-            </TextArea>
-            <ButtonArea>
-              <TextButton>Ver desafio</TextButton>
-              <ButtonImage name="arrow-redo-outline" />
-            </ButtonArea>
-          </Card>
-        ))}
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={{ flex: 1 }}
+      >
+        {challenges.map(userChallenge => {
+          const { challenge } = userChallenge;
 
-        <Modal
-          animationType="slide"
-          transparent
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <CenteredView>
-              <ModalView>
-                <ButtonClose onPress={() => setModalVisible(!modalVisible)}>
-                  <CloseImage name="close-outline" />
-                </ButtonClose>
+          return (
+            <ChallengeCard
+              key={userChallenge.id}
+              title={challenge.title}
+              description={challenge.description}
+              icon={challenge.icon_url}
+              onPress={() => {
+                setVisibleModal(true);
+                setUserChallenge(userChallenge);
+              }}
+            />
+          );
+        })}
+      </ScrollView>
 
-                <TextArea>
-                  <LineText />
-                  <TextCard>{selectedChallenge?.title}</TextCard>
-                </TextArea>
-                <TextModal>{selectedChallenge?.text}</TextModal>
-
-                <Button
-                  title="Completar desafio"
-                  onPress={() => setModalVisible(!modalVisible)}
-                />
-              </ModalView>
-            </CenteredView>
-          </ScrollView>
-        </Modal>
-      </Container>
-    </ScrollView>
+      <Modal
+        isVisible={visibleModal}
+        onModalShow={() => setVisibleModal(true)}
+        onModalHide={() => setVisibleModal(false)}
+        onSwipeComplete={() => setVisibleModal(false)}
+        swipeDirection="down"
+        onBackButtonPress={() => setVisibleModal(false)}
+        style={{
+          margin: 0,
+        }}
+      >
+        <StatusBar backgroundColor="rgba(0,0,0,0.7)" barStyle="light-content" />
+        <ModalContainer>
+          {Object.keys(selectedUserChallenge).length > 0 && (
+            <ChallengeModal
+              title={selectedUserChallenge.challenge.title}
+              description={selectedUserChallenge.challenge.description}
+              content={selectedUserChallenge.challenge.content}
+              icon={selectedUserChallenge.challenge.icon_url}
+              isComplete={selectedUserChallenge.is_completed}
+              onClose={() => setVisibleModal(false)}
+            />
+          )}
+        </ModalContainer>
+      </Modal>
+    </Container>
   );
 };

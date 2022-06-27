@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 
 import { Input } from 'components/Inputs/Default';
-import { Form } from 'styles/global';
+import { Form } from 'global/styles/global';
 import { Button } from 'components/Buttons/Default';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import { useNavigation } from '@react-navigation/native';
@@ -37,8 +37,7 @@ export function Step2() {
   const handleSubmit: SubmitHandler<IFormData> = useCallback(
     async data => {
       formRef.current?.setErrors({});
-      setLoading(true);
-
+      // setLoading(true);
       const birthday = new Date();
 
       if (data.birthday) {
@@ -60,7 +59,7 @@ export function Step2() {
           genre: Yup.string().required(),
         });
 
-        await schema.validate(data, { abortEarly: false });
+        await schema.validate({ ...data, birthday }, { abortEarly: false });
 
         await api.put('/users', {
           ...data,
@@ -105,7 +104,7 @@ export function Step2() {
 
         <Mask
           name="birthday"
-          placeholder="Data de nascimento"
+          placeholder="Data de nascimento (DD/MM/AAAA)"
           icon="calendar-outline"
           mask={Masks.DATE_DDMMYYYY}
           keyboardType="number-pad"
