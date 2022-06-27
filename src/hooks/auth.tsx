@@ -39,29 +39,22 @@ const AuthProvider = ({ children }: IContextReference) => {
     setUser({} as IUserProps);
   }, []);
 
-  const handleLogin = useCallback(
-    async ({ email, password }: ILoginProps) => {
-      try {
-        const {
-          data: { token },
-        } = await api.post('/auth/login', {
-          email,
-          password,
-        });
+  const handleLogin = useCallback(async ({ email, password }: ILoginProps) => {
+    const {
+      data: { token },
+    } = await api.post('/auth/login', {
+      email,
+      password,
+    });
 
-        api.defaults.headers.common.Authorization = `Bearer ${token}`;
+    api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-        await AsyncStorage.setItem('@access_token', token);
+    await AsyncStorage.setItem('@access_token', token);
 
-        const { data } = await api.get('/users/me');
+    const { data } = await api.get('/users/me');
 
-        setUser(data);
-      } catch (error) {
-        await handleLogout();
-      }
-    },
-    [handleLogout],
-  );
+    setUser(data);
+  }, []);
 
   const handleVerifyToken = useCallback(async () => {
     const { data: token } = await Notification.getExpoPushTokenAsync();
