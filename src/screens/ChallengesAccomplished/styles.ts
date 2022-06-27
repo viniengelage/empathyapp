@@ -30,7 +30,7 @@ export const TextCard = styled.Text`
   color: ${({ theme }) => theme.colors.secundary};
   font-size: 18px;
   line-height: 20px;
-  font-family: ${({ theme }) => theme.fonts.light};
+  font-family: ${({ theme }) => theme.fonts.regular};
   text-align: left;
 `;
 
@@ -85,6 +85,12 @@ export const ButtonImage = styled(Ionicons)`
 export const CenteredView = styled.View`
   flex: 1;
   /*   height: 80vh; */
+`;
+
+export const ModalContainer = styled.View`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 `;
 
 export const ModalView = styled.View`

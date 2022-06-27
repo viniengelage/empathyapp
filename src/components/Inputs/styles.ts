@@ -34,7 +34,7 @@ export const ContainerButton = styled.TouchableOpacity<Props>`
   background: ${({ theme }) => theme.colors.innerBackground};
   width: 100%;
   height: 50px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.styles.borderRadius};
   display: flex;
   flex-direction: row;
   align-items: center;

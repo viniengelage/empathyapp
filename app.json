@@ -20,6 +20,13 @@
       {
         "photosPermission": "The app accesses your photos to let you share them with your friends."
       }
+    ],
+    [
+      "expo-notifications",
+      {
+        "icon": "./src/assets/icon-notify.png",
+        "color": "#ffffff"
+      }
     ]
   ]
 }

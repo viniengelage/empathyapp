@@ -49,12 +49,9 @@ const Login = () => {
         });
         setLoading(false);
       } catch (error) {
-        console.log(error);
         setLoading(false);
 
         const axiosError = error as unknown as AxiosError;
-
-        console.log(axiosError.response, axiosError.response?.status);
 
         if (axiosError.response && axiosError.response.status === 400) {
           Toast.show({
