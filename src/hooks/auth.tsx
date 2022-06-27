@@ -10,7 +10,6 @@ import React, {
 import * as Notification from 'expo-notifications';
 import { api } from 'services/api';
 import { IUserProps } from 'types/user';
-import { useToast } from 'react-native-toast-notifications';
 
 interface IContextReference {
   children: JSX.Element | JSX.Element[];
@@ -96,10 +95,10 @@ const AuthProvider = ({ children }: IContextReference) => {
       setUser(data);
       setLoading(false);
     } catch (error) {
-      console.log('hey from error');
-      console.log(error);
+      await handleLogout();
     }
-  }, []);
+  }, [handleLogout]);
+
   useEffect(() => {
     handleGetUser();
   }, [handleGetUser]);

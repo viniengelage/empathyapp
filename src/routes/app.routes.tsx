@@ -51,20 +51,6 @@ const AppRoutes = () => {
         }}
       />
       <Screen
-        name="Post"
-        component={Post}
-        // options={{
-        //   tabBarIcon: ({ size, color, focused }) => (
-        //     <Ionicons
-        //       name="file-tray-full"
-        //       size={size}
-        //       color={color}
-        //       style={focused && focusedIconStyle}
-        //     />
-        //   ),
-        // }}
-      />
-      <Screen
         name="Home"
         component={Home}
         options={{

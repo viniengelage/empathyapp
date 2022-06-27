@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Feed } from 'screens/Feed';
+import { Post } from 'screens/Post';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -12,6 +13,7 @@ const FeedRoutes = () => (
     }}
   >
     <Screen name="Feed" component={Feed} />
+    <Screen name="Post" component={Post} />
   </Navigator>
 );
 

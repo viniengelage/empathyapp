@@ -5,6 +5,7 @@ import { useTheme } from 'styled-components';
 import { Ionicons } from '@expo/vector-icons';
 
 import { Text } from 'react-native';
+import { IPostProps } from 'types/post';
 import {
   Container,
   NoticeTitle,
@@ -18,12 +19,7 @@ import {
 type LoginScreenProp = StackNavigationProp<any, 'Notice'>;
 
 interface IProps {
-  post: {
-    id: string;
-    title: string;
-    description: string;
-    thumbnail_url: string;
-  };
+  post: IPostProps;
 }
 
 export function Notice({ post }: IProps) {
