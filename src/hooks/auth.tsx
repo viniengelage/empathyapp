@@ -66,7 +66,10 @@ const AuthProvider = ({ children }: IContextReference) => {
   const handleVerifyToken = useCallback(async () => {
     const { data: token } = await Notification.getExpoPushTokenAsync();
 
-    if (!user.push_token || (user.push_token && user.push_token !== token)) {
+    const userHasToken = !!user.push_token;
+    const sameToken = user.push_token === token;
+
+    if (!userHasToken && !sameToken) {
       await api.put('/users', {
         push_token: token,
       });
@@ -74,14 +77,13 @@ const AuthProvider = ({ children }: IContextReference) => {
   }, [user]);
 
   useEffect(() => {
-    if (user) {
+    if (Object.keys(user).length > 0) {
       handleVerifyToken();
     }
   }, [handleVerifyToken, user]);
 
   const handleGetUser = useCallback(async () => {
     const storagedToken = await AsyncStorage.getItem('@access_token');
-
     if (!storagedToken) {
       setLoading(false);
       return;

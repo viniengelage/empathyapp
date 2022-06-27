@@ -26,13 +26,14 @@ import {
   RegisterText,
   RegisterButton,
   Description,
+  ForgotPasswordButton,
+  ForgotPasswordText,
 } from './styles';
 
 type LoginScreenProp = StackNavigationProp<any, 'Login'>;
 
 const Login = () => {
   const formRef = useRef<FormHandles>(null);
-
   const { login } = useAuth();
   const { navigate } = useNavigation<LoginScreenProp>();
 
@@ -48,6 +49,7 @@ const Login = () => {
         });
         setLoading(false);
       } catch (error) {
+        console.log(error);
         setLoading(false);
 
         const axiosError = error as unknown as AxiosError;
@@ -100,6 +102,10 @@ const Login = () => {
             />
           </Form>
         </ScrollView>
+
+        <ForgotPasswordButton onPress={() => navigate('ForgotPassword')}>
+          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+        </ForgotPasswordButton>
 
         <ButtonWrapper>
           <Button

@@ -54,3 +54,12 @@ export const RegisterButton = styled.Text`
   font-size: 18px;
   font-family: ${({ theme }) => theme.fonts.bold};
 `;
+
+export const ForgotPasswordButton = styled.TouchableOpacity``;
+export const ForgotPasswordText = styled.Text`
+  text-align: center;
+  font-family: ${({ theme }) => theme.fonts.regular};
+  text-decoration: underline;
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: ${RFValue(12)}px;
+`;
